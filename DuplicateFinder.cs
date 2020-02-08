@@ -5,10 +5,10 @@ namespace FindDuplicateInAString
 {
     public class DuplicateFinder
     {
-        public static Boolean FindDuplicate(string[] stringArray)
+        public static bool FindDuplicate(string[] stringArray)
         {
             Array.Sort(stringArray);
-            Boolean IsDublicatesAvailable = false;
+            bool IsDublicatesAvailable = false;
             for (int i = 0; i <= stringArray.Length - 2; i++)
             {
                 if (stringArray[i] == stringArray[i + 1])
@@ -26,9 +26,9 @@ namespace FindDuplicateInAString
         }
 
 
-        public static Boolean FindDuplicateUsingCharArray(string str)
+        public static bool FindDuplicateUsingCharArray(string str)
         {
-            Boolean IsDublicatesAvailable = false;
+            bool IsDublicatesAvailable = false;
             var countCollection = str.ToCharArray().GroupBy(r => r)
                                     .Select(s => new
                                     {
@@ -37,25 +37,37 @@ namespace FindDuplicateInAString
             foreach (var item in countCollection)
             {
                 if (item.Count > 1)
+                {
                     IsDublicatesAvailable = true;
+                }
             }
             return IsDublicatesAvailable;
 
         }
 
-        public static Boolean FindDuplicateUsingForLoops(string str)
+        public static bool FindDuplicateUsingForLoops(string str)
         {
-            Boolean IsDublicatesAvailable = false;
-            for (var i = 0; i < str.Length; i++)
+            bool IsDublicatesAvailable = false;
+            for (int i = 0; i < str.Length; i++)
             {
 
-                for (var j = i + 1; j < str.Length; j++)
+                for (int j = i + 1; j < str.Length; j++)
                 {
                     if (str[i] == str[j])
+                    {
                         IsDublicatesAvailable = true;
-
+                    }
                 }
             }
+            return IsDublicatesAvailable;
+
+        }
+
+        public static bool FindDuplicateUsingDistinct(string str)
+        {
+            bool IsDublicatesAvailable = false;
+            if (str.Distinct().ToArray().Length == str.Length)
+                IsDublicatesAvailable = true;
             return IsDublicatesAvailable;
 
         }
